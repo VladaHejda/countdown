@@ -1,0 +1,8 @@
+{
+	"autooad": {
+		"classmap": ["app"]
+	},
+	"require": {
+		"nette/nette": "~2.3"
+	}
+}
