@@ -13,7 +13,7 @@ $container = $configurator->createContainer();
 
 $router = $container->getService('router');
 
-$router[] = new Route('', function($presenter) use ($container) {
+$router[] = new Route('[<name [a-z0-9]*>]', function($presenter, $name) use ($container) {
 
 	$template = $presenter->createTemplate()->setFile(__DIR__ . '/templates/home.latte');
 	$template->setParameters(array(
@@ -26,6 +26,7 @@ $router[] = new Route('', function($presenter) use ($container) {
 		'reload' => false,
 		'backgroundColor' => '000',
 		'textColor' => 'fff',
+		'story' => $name ? "Some $name story..." : 'Odpočetfacky.com',
 	));
 	return $template;
 });
