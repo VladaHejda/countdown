@@ -1,0 +1,4 @@
+database:
+	dsn: %database.dsn%
+	user: %database.user%
+	password: %database.password%

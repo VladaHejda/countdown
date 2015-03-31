@@ -1,0 +1,12 @@
+development:
+	parameters:
+		database:
+			dsn: 'mysql:host=localhost;dbname=countdown'
+			user:
+			password:
+production:
+	parameters:
+		database:
+			dsn:
+			user:
+			password:
