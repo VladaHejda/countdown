@@ -1,0 +1,7 @@
+{
+	"name": "countdown",
+	"version": "1.0.0",
+	"dependencies": {
+		"jquery.countdown": "~2.0.4"
+	}
+}
