@@ -2,6 +2,31 @@
   margin: 0;
   padding: 0;
 }
+body {
+  font-family: Arial, "sans-serif";
+}
+.outer {
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.outer .middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+#countdown {
+  color: #ccc;
+  font-size: 10vmin;
+  font-weight: bold;
+  text-align: center;
+}
+#countdown .number {
+  font-family: "Lucida Console", monospace;
+}
 #story {
   display: none;
+  font-size: 5vmin;
+  color: #fff;
+  text-align: center;
 }

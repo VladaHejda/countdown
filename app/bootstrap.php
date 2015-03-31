@@ -24,6 +24,8 @@ $router[] = new Route('', function($presenter) use ($container) {
 			'seconds' => 3,
 		),
 		'reload' => false,
+		'backgroundColor' => '000',
+		'textColor' => 'fff',
 	));
 	return $template;
 });
