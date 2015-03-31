@@ -3,7 +3,9 @@ $(function() {
 	date.setDate(date.getDate() + countdown.days);
 	date.setHours(date.getHours() + countdown.hours);
 	date.setMinutes(date.getMinutes() + countdown.minutes);
-	date.setSeconds(date.getSeconds() + countdown.seconds);
+	// adding one second when reload expected to prevent client inaccurate timing
+	date.setSeconds(date.getSeconds() + countdown.seconds + (reload ? 1 : 0));
+
 	$("#countdown").countdown(date)
 		.on('update.countdown finish.countdown', function(event) {
 			var countdown = $(this);
@@ -13,6 +15,11 @@ $(function() {
 			countdown.find('.seconds').text(event.strftime('%S'));
 		})
 		.on('finish.countdown', function(event) {
-			window.location.reload();
+			if (reload) {
+				window.location.reload();
+			} else {
+				$(this).hide();
+				$('#story').show();
+			}
 	});
 });

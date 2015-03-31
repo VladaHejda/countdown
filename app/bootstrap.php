@@ -21,8 +21,9 @@ $router[] = new Route('', function($presenter) use ($container) {
 			'days' => 0,
 			'hours' => 0,
 			'minutes' => 0,
-			'seconds' => 13,
+			'seconds' => 3,
 		),
+		'reload' => false,
 	));
 	return $template;
 });

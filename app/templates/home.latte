@@ -2,9 +2,8 @@
 
 {block content}
 
-<article id="countdown">
-	<span class="days">{$countdown->days}</span> :
-	<span class="hours">{$countdown->hours}</span> :
-	<span class="minutes">{$countdown->minutes}</span> :
-	<span class="seconds">{$countdown->seconds}</span>
+{include 'components/countdown.latte'}
+
+<article id="story">
+	<p>Odpočetfacky.com</p>
 </article>
