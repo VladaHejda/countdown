@@ -24,6 +24,9 @@ body {
 #countdown .number {
   font-family: "Lucida Console", monospace;
 }
+#countdown .colon {
+  opacity: 0.5;
+}
 #story {
   font-size: 5vmin;
   color: #fff;

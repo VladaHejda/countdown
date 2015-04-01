@@ -30,6 +30,8 @@ class CountdownHandler extends \Nette\Object
 		$template = $presenter->createTemplate();
 		$days = $hours = $minutes = $seconds = 0;
 		$finished = $defaultPage = false;
+		$background = '000000';
+		$color = 'ffffff';
 
 		try {
 			if (empty($name)) {
@@ -39,11 +41,14 @@ class CountdownHandler extends \Nette\Object
 
 			} else {
 
-				$data = $this->database->fetch('SELECT story, expiration FROM countdown WHERE name = ?', $name);
+				$data = $this->database->fetch('SELECT story, expiration, background, color
+					FROM countdown WHERE name = ?', $name);
 				if (!$data) {
 					throw new \InvalidArgumentException;
 				}
 				$story = $data->story;
+				$background = $data->background;
+				$color = $data->color;
 				$now = new \DateTime;
 				if ($now > $data->expiration) {
 					$finished = true;
@@ -70,8 +75,8 @@ class CountdownHandler extends \Nette\Object
 				'minutes' => $minutes,
 				'seconds' => $seconds,
 			],
-			'backgroundColor' => '000',
-			'textColor' => 'fff',
+			'backgroundColor' => $background,
+			'textColor' => $color,
 			'defaultPage' => $defaultPage,
 			'finished' => $finished,
 			'story' => $finished ? $story : null,
