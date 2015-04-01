@@ -1,5 +1,5 @@
 {
-	"autooad": {
+	"autoload": {
 		"classmap": ["app"]
 	},
 	"require": {
