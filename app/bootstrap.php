@@ -26,18 +26,18 @@ $router[] = new Route('[<name [a-z0-9]*>]', function($presenter, $name, \Nette\H
 		$story = "Some $name story...";
 	}
 
-	$template->setParameters(array(
-		'countdown' => (object) array(
+	$template->setParameters([
+		'countdown' => (object) [
 			'days' => 0,
 			'hours' => 0,
 			'minutes' => 0,
 			'seconds' => 3,
-		),
+		],
 		'reload' => false,
 		'backgroundColor' => '000',
 		'textColor' => 'fff',
 		'story' => $story,
-	));
+	]);
 	return $template;
 });
 
