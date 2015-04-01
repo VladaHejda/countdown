@@ -29,14 +29,16 @@ class CountdownHandler extends \Nette\Object
 	{
 		$template = $presenter->createTemplate();
 		$days = $hours = $minutes = $seconds = 0;
-		$showStory = false;
+		$finished = $defaultPage = false;
 
 		try {
 			if (empty($name)) {
 				$seconds = $this->defaultSeconds;
+				$defaultPage = true;
 				$story = null;
 
 			} else {
+
 				$data = $this->database->fetch('SELECT story, expiration FROM countdown WHERE name = ?', $name);
 				if (!$data) {
 					throw new \InvalidArgumentException;
@@ -44,7 +46,8 @@ class CountdownHandler extends \Nette\Object
 				$story = $data->story;
 				$now = new \DateTime;
 				if ($now > $data->expiration) {
-					$showStory = true;
+					$finished = true;
+
 				} else {
 					$secondsShift = $data->expiration->format('U') - $now->format('U');
 					$days = floor($secondsShift / (60 *60 *24));
@@ -54,7 +57,8 @@ class CountdownHandler extends \Nette\Object
 					$seconds = $interval->s;
 				}
 			}
-		$template->setFile(__DIR__ . '/../templates/countdown.latte');
+			$template->setFile(__DIR__ . '/../templates/countdown.latte');
+
 		} catch (\InvalidArgumentException $e) {
 			$template->setFile(__DIR__ . '/../templates/404.latte');
 		}
@@ -66,12 +70,11 @@ class CountdownHandler extends \Nette\Object
 				'minutes' => $minutes,
 				'seconds' => $seconds,
 			],
-			'reload' => false,
 			'backgroundColor' => '000',
 			'textColor' => 'fff',
-			'defaultPage' => !$name,
-			'showStory' => $showStory,
-			'story' => $story,
+			'defaultPage' => $defaultPage,
+			'finished' => $finished,
+			'story' => $finished ? $story : null,
 		]);
 
 		return $template;

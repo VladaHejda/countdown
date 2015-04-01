@@ -5,21 +5,24 @@
 <div class="outer">
 	<div class="middle">
 
-		<article id="countdown">
+		<article id="countdown" n:if="!$finished">
 			<span class="days number"></span> :
 			<span class="hours number"></span> :
 			<span class="minutes number"></span> :
 			<span class="seconds number"></span>
 		</article>
 
-		<article id="story">
-			{if $defaultPage}
+		{if $defaultPage}
+			<article id="story" style="display: none;">
 				<h1>Odpočetfacky.com</h1>
 				<p><a class="btn btn-success" href="{$basePath}/create">Vytvořit</a></p>
-			{else}
+			</article>
+
+		{elseif $finished}
+			<article id="story">
 				<p>{$story}</p>
-			{/if}
-		</article>
+			</article>
+		{/if}
 
 	</div>
 </div>
