@@ -1,3 +1,6 @@
+parameters:
+	defaultSeconds: 13
+
 database:
 	dsn: %database.dsn%
 	user: %database.user%
