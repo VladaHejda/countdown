@@ -1,0 +1,25 @@
+{layout layout.latte}
+
+{block content}
+
+<div class="outer">
+	<div class="middle">
+
+		<article id="countdown">
+			<span class="days number"></span> :
+			<span class="hours number"></span> :
+			<span class="minutes number"></span> :
+			<span class="seconds number"></span>
+		</article>
+
+		<article id="story">
+			{if $defaultPage}
+				<h1>Odpočetfacky.com</h1>
+				<p><a class="btn btn-success" href="{$basePath}/create">Vytvořit</a></p>
+			{else}
+				<p>{$story}</p>
+			{/if}
+		</article>
+
+	</div>
+</div>

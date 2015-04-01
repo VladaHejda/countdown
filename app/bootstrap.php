@@ -14,17 +14,9 @@ $container = $configurator->createContainer();
 
 $router = $container->getService('router');
 
-$router[] = new Route('[<name [a-z0-9]*>]', function($presenter, $name, \Nette\Http\Request $request)
-	use ($container) {
+$router[] = new Route('[<name [a-z0-9]*>]', function($presenter, $name) use ($container) {
 
-	$template = $presenter->createTemplate()->setFile(__DIR__ . '/templates/home.latte');
-
-	if (empty($name)) {
-		$story = Html::el()->setHtml("Odpočetfacky.com\n<br>")->add(
-			Html::el('a')->setText('VYTVOŘIT')->href($request->getUrl()->getScriptPath() . 'create'));
-	} else {
-		$story = "Some $name story...";
-	}
+	$template = $presenter->createTemplate()->setFile(__DIR__ . '/templates/countdown.latte');
 
 	$template->setParameters([
 		'countdown' => (object) [
@@ -36,7 +28,8 @@ $router[] = new Route('[<name [a-z0-9]*>]', function($presenter, $name, \Nette\H
 		'reload' => false,
 		'backgroundColor' => '000',
 		'textColor' => 'fff',
-		'story' => $story,
+		'defaultPage' => !$name,
+		'story' => "Some $name story...",
 	]);
 	return $template;
 });
