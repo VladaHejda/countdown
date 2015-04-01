@@ -5,7 +5,7 @@
 <div class="outer">
 	<div class="middle">
 
-		<article id="countdown" n:if="!$finished">
+		<article id="countdown" n:if="!$finished" class="user-color">
 			<span class="days number"></span> <span class="colon">:</span>
 			<span class="hours number"></span> <span class="colon">:</span>
 			<span class="minutes number"></span> <span class="colon">:</span>
@@ -13,13 +13,13 @@
 		</article>
 
 		{if $defaultPage}
-			<article id="story" style="display: none;">
+			<article id="story" class="user-color" style="display: none;">
 				<h1>Odpočetfacky.com</h1>
 				<p><a class="btn btn-success" href="{$basePath}/create">Vytvořit</a></p>
 			</article>
 
 		{elseif $finished}
-			<article id="story">
+			<article id="story" class="user-color">
 				<p>{$story}</p>
 			</article>
 		{/if}

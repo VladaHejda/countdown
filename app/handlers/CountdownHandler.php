@@ -1,6 +1,7 @@
 <?php
 
 use Nette\Database\Context;
+use Nette\Http\Response;
 use NetteModule\MicroPresenter;
 
 class CountdownHandler extends \Nette\Object
@@ -12,11 +13,15 @@ class CountdownHandler extends \Nette\Object
 	/** @var Context */
 	private $database;
 
+	/** @var Response */
+	private $response;
 
-	public function __construct($defaultSeconds, Context $database)
+
+	public function __construct($defaultSeconds, Context $database, Response $response)
 	{
 		$this->defaultSeconds = $defaultSeconds;
 		$this->database = $database;
+		$this->response = $response;
 	}
 
 
@@ -32,6 +37,7 @@ class CountdownHandler extends \Nette\Object
 		$finished = $defaultPage = false;
 		$background = '000000';
 		$color = 'ffffff';
+		$story = null;
 
 		try {
 			if (empty($name)) {
@@ -46,11 +52,11 @@ class CountdownHandler extends \Nette\Object
 				if (!$data) {
 					throw new \InvalidArgumentException;
 				}
-				$story = $data->story;
 				$background = $data->background;
 				$color = $data->color;
 				$now = new \DateTime;
 				if ($now > $data->expiration) {
+					$story = $data->story;
 					$finished = true;
 
 				} else {
@@ -65,6 +71,8 @@ class CountdownHandler extends \Nette\Object
 			$template->setFile(__DIR__ . '/../templates/countdown.latte');
 
 		} catch (\InvalidArgumentException $e) {
+			$finished = true;
+			$this->response->setCode(404);
 			$template->setFile(__DIR__ . '/../templates/404.latte');
 		}
 
@@ -79,7 +87,7 @@ class CountdownHandler extends \Nette\Object
 			'textColor' => $color,
 			'defaultPage' => $defaultPage,
 			'finished' => $finished,
-			'story' => $finished ? $story : null,
+			'story' => $story,
 		]);
 
 		return $template;

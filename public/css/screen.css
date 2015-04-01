@@ -16,7 +16,6 @@ body {
   vertical-align: middle;
 }
 #countdown {
-  color: #ccc;
   font-size: 10vmin;
   font-weight: bold;
   text-align: center;
@@ -25,10 +24,14 @@ body {
   font-family: "Lucida Console", monospace;
 }
 #countdown .colon {
+  color: #ccc;
   opacity: 0.5;
 }
 #story {
   font-size: 5vmin;
-  color: #fff;
   text-align: center;
+}
+#story.notfound h1 {
+  font-style: italic;
+  color: #888;
 }
