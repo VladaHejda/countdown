@@ -4,36 +4,53 @@
 }
 body {
 	font-family: Arial, "sans-serif";
+	background: #000;
+	color: #fff;
 }
 
-.outer {
+.main-outer {
 	display: table;
 	position: absolute;
 	height: 100%;
 	width: 100%;
-	.middle {
+	.main-inner {
 		display: table-cell;
 		vertical-align: middle;
-	}
-}
 
-#countdown {
-	font-size: 10vmin;
-	font-weight: bold;
-	text-align: center;
-	.number {
-		font-family: "Lucida Console", monospace;
-	}
-	.colon {
-		color: #ccc;
-		opacity: 0.5;
-	}
-}
-#story {
-	font-size: 5vmin;
-	text-align: center;
-	&.notfound h1 {
-		font-style: italic;
-		color: #888;
+		#prologue {
+			font-size: 5vmin;
+			position: absolute;
+			width: 100%;
+			text-align: center;
+			.prologue-inner {
+				position: relative;
+				top: -10vh;
+			}
+		}
+
+		#countdown {
+			font-size: 10vmin;
+			font-weight: bold;
+			text-align: center;
+			.number {
+				font-family: "Lucida Console", monospace;
+			}
+			.colon {
+				color: #ccc;
+				opacity: 0.5;
+			}
+		}
+
+		#epilogue {
+			font-size: 5vmin;
+			text-align: center;
+			h1 {
+				font-size: 8vmin;
+			}
+			&.notfound h1 {
+				font-style: italic;
+				color: #888;
+			}
+		}
 	}
 }

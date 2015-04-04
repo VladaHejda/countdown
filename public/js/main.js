@@ -18,7 +18,7 @@ $(function() {
 			.on('finish.countdown', function (event) {
 				if (defaultPage) {
 					$(this).hide();
-					$('#story').show();
+					$('#epilogue').show();
 				} else {
 					window.location.reload();
 				}

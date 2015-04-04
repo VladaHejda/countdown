@@ -11,18 +11,24 @@
 {block styles}
 	<style>
 		.user-background {
-			background: #{$backgroundColor};
+			background: #{$backgroundColor} !important;
 		}
 		.user-color {
-			color: #{$textColor};
+			color: #{$textColor} !important;
 		}
 	</style>
 {/block}
 
 {block content}
 
-<div class="outer">
-	<div class="middle">
+<div class="main-outer">
+	<div class="main-inner">
+
+		<article id="prologue" n:if="!$finished && !empty($prologue)" class="user-color">
+			<div class="prologue-inner">
+				<p>{$prologue}</p>
+			</div>
+		</article>
 
 		<article id="countdown" n:if="!$finished" class="user-color">
 			<span class="days number"></span> <span class="colon">:</span>
@@ -32,14 +38,14 @@
 		</article>
 
 		{if $defaultPage}
-			<article id="story" class="user-color" style="display: none;">
+			<article id="epilogue" class="user-color" style="display: none;">
 				<h1>Odpočetfacky.com</h1>
 				<p><a class="btn btn-success" href="{$basePath}/create">Vytvořit</a></p>
 			</article>
 
 		{elseif $finished}
-			<article id="story" class="user-color">
-				<p>{$story}</p>
+			<article id="epilogue" class="user-color">
+				<p>{$epilogue}</p>
 			</article>
 		{/if}
 

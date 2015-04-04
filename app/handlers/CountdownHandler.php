@@ -37,17 +37,16 @@ class CountdownHandler extends \Nette\Object
 		$finished = $defaultPage = false;
 		$background = '000000';
 		$color = 'ffffff';
-		$story = null;
+		$prologue = $epilogue = null;
 
 		try {
 			if (empty($name)) {
 				$seconds = $this->defaultSeconds;
 				$defaultPage = true;
-				$story = null;
 
 			} else {
 
-				$data = $this->database->fetch('SELECT story, expiration, background, color
+				$data = $this->database->fetch('SELECT prologue, epilogue, expiration, background, color
 					FROM countdown WHERE name = ?', $name);
 				if (!$data) {
 					throw new \InvalidArgumentException;
@@ -56,10 +55,11 @@ class CountdownHandler extends \Nette\Object
 				$color = $data->color;
 				$now = new \DateTime;
 				if ($now > $data->expiration) {
-					$story = $data->story;
+					$epilogue = $data->epilogue;
 					$finished = true;
 
 				} else {
+					$prologue = $data->prologue;
 					$secondsShift = $data->expiration->format('U') - $now->format('U');
 					$days = floor($secondsShift / (60 *60 *24));
 					$interval = $now->diff($data->expiration);
@@ -87,7 +87,8 @@ class CountdownHandler extends \Nette\Object
 			'textColor' => $color,
 			'defaultPage' => $defaultPage,
 			'finished' => $finished,
-			'story' => $story,
+			'prologue' => $prologue,
+			'epilogue' => $epilogue,
 		]);
 
 		return $template;

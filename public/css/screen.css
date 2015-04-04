@@ -4,34 +4,49 @@
 }
 body {
   font-family: Arial, "sans-serif";
+  background: #000;
+  color: #fff;
 }
-.outer {
+.main-outer {
   display: table;
   position: absolute;
   height: 100%;
   width: 100%;
 }
-.outer .middle {
+.main-outer .main-inner {
   display: table-cell;
   vertical-align: middle;
 }
-#countdown {
+.main-outer .main-inner #prologue {
+  font-size: 5vmin;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+.main-outer .main-inner #prologue .prologue-inner {
+  position: relative;
+  top: -10vh;
+}
+.main-outer .main-inner #countdown {
   font-size: 10vmin;
   font-weight: bold;
   text-align: center;
 }
-#countdown .number {
+.main-outer .main-inner #countdown .number {
   font-family: "Lucida Console", monospace;
 }
-#countdown .colon {
+.main-outer .main-inner #countdown .colon {
   color: #ccc;
   opacity: 0.5;
 }
-#story {
+.main-outer .main-inner #epilogue {
   font-size: 5vmin;
   text-align: center;
 }
-#story.notfound h1 {
+.main-outer .main-inner #epilogue h1 {
+  font-size: 8vmin;
+}
+.main-outer .main-inner #epilogue.notfound h1 {
   font-style: italic;
   color: #888;
 }
