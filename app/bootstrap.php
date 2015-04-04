@@ -13,6 +13,10 @@ $container = $configurator->createContainer();
 
 $router = $container->getService('router');
 
+$router[] = new Route('create', function($presenter) use ($container) {
+	return $container->getByType('CreateHandler')->run($presenter);
+});
+
 $router[] = new Route('[<name [a-z0-9]*>]', function($presenter, $name) use ($container) {
 	return $container->getByType('CountdownHandler')->run($presenter, $name);
 });

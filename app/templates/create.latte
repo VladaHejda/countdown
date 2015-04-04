@@ -1,0 +1,51 @@
+{layout layout.latte}
+
+{block content}
+
+{form $createForm}
+	<table>
+		<tr>
+			<th>{label prologue /}</th><td>{input prologue}</td>
+		</tr>
+		<tr class="error" n:if="$form[prologue]->errors" n:foreach="$form[prologue]->errors as $error">
+			<td colspan="2">{$error}</td>
+		</tr>
+
+		{formContainer dateTime}
+		<tr class="expiration">
+			<th>Datum a čas vypršení:</th>
+			<td>{input day}. {input month}. {input year} {input hour} : {input minute} : {input second}</td>
+		</tr>
+		{var $errors = array_merge($formContainer[day]->errors, $formContainer[month]->errors, $formContainer[year]->errors,
+			$formContainer[hour]->errors, $formContainer[minute]->errors, $formContainer[second]->errors)}
+		<tr class="error" n:if="$errors" n:foreach="$errors as $error">
+			<td colspan="2">{$error}</td>
+		</tr>
+		{/formContainer}
+
+		<tr>
+			<th>{label textColor /}</th><td>{input textColor}</td>
+		</tr>
+		<tr class="error" n:if="$form[textColor]->errors" n:foreach="$form[textColor]->errors as $error">
+			<td colspan="2">{$error}</td>
+		</tr>
+
+		<tr>
+			<th>{label backgroundColor /}</th><td>{input backgroundColor}</td>
+		</tr>
+		<tr class="error" n:if="$form[backgroundColor]->errors" n:foreach="$form[backgroundColor]->errors as $error">
+			<td colspan="2">{$error}</td>
+		</tr>
+
+		<tr>
+			<th>{label epilogue /}</th><td>{input epilogue}</td>
+		</tr>
+		<tr class="error" n:if="$form[epilogue]->errors" n:foreach="$form[epilogue]->errors as $error">
+			<td colspan="2">{$error}</td>
+		</tr>
+
+		<tr>
+			<th></th><td>{input create}</td>
+		</tr>
+	</table>
+{/form}

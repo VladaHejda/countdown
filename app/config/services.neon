@@ -8,3 +8,4 @@ database:
 
 services:
 	- CountdownHandler(%defaultSeconds%)
+	- CreateHandler
