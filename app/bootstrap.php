@@ -5,7 +5,8 @@ use Nette\Application\Routers\Route;
 require __DIR__ . '/../vendor/autoload.php';
 
 $configurator = new Nette\Configurator;
-$configurator->enableDebugger(__DIR__ . '/../log');
+$configurator->setDebugMode([]);
+$configurator->enableDebugger(__DIR__ . '/../log', 'hejdav@centrum.cz');
 $configurator->setTempDirectory(__DIR__ . '/../temp');
 $configurator->addConfig(__DIR__ . '/config/secure.neon', $configurator::AUTO);
 $configurator->addConfig(__DIR__ . '/config/services.neon');
