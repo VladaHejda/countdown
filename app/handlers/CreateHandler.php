@@ -10,6 +10,9 @@ use Tracy\Debugger;
 class CreateHandler extends \Nette\Object
 {
 
+	/** @var array */
+	private static $reservedWords = ['create'];
+
 	/** @var Context */
 	private $database;
 
@@ -58,6 +61,9 @@ class CreateHandler extends \Nette\Object
 		do {
 			try {
 				$name = \Nette\Utils\Random::generate(5);
+				if (in_array($name, static::$reservedWords, true)) {
+					continue;
+				}
 				$this->database->query('INSERT INTO countdown ?', [
 					'name' => $name,
 					'prologue' => $values->prologue ?: null,
