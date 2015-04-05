@@ -38,6 +38,7 @@ class CreateHandler extends \Nette\Object
 		$createForm->fireEvents();
 
 		$template->setParameters([
+			'page' => 'create',
 			'createForm' => $createForm,
 		]);
 
@@ -87,7 +88,7 @@ class CreateHandler extends \Nette\Object
 			->setType('color')
 			->setRequired('Vyplň barvu textu.')
 			->setDefaultValue('#ffffff')
-			->addRule(Form::PATTERN, $colorError = 'Vyplň barvu jako # následující 6-ti hexadecimálnímy znaky.',
+			->addRule(Form::PATTERN, $colorError = 'Vyplň barvu jako # následující 6-ti hexadecimálními znaky.',
 				$colorPattern = '#[a-f0-9]{6}');
 
 		$form->addText('backgroundColor', 'Barva pozadí:')
@@ -96,7 +97,7 @@ class CreateHandler extends \Nette\Object
 			->setDefaultValue('#000000')
 			->addRule(Form::PATTERN, $colorError, $colorPattern);
 
-		$form->addText('epilogue', 'Text po vypršení odpočtu:')
+		$form->addText('epilogue', 'Text po vypršení:')
 			->setRequired('Vyplň text.');
 
 		$form->addSubmit('create', 'Vytvořit');
@@ -132,7 +133,7 @@ class CreateHandler extends \Nette\Object
 		$container->addText('hour')
 			->setType('number')
 			->setRequired($fillDateError)
-			->setDefaultValue($now->format('H'))
+			->setDefaultValue((int) $now->format('H') +1) // plus one hour to current time
 			->addRule(Form::INTEGER, 'Vyplň správně hodiny.')
 			->addRule(Form::RANGE, 'Vyplň správně hodiny.', [0, 23]);
 

@@ -77,6 +77,7 @@ class CountdownHandler extends \Nette\Object
 		}
 
 		$template->setParameters([
+			'page' => 'countdown',
 			'countdown' => (object) [
 				'days' => $days,
 				'hours' => $hours,

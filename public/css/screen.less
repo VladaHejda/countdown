@@ -4,8 +4,16 @@
 }
 body {
 	font-family: Arial, "sans-serif";
-	background: #000;
-	color: #fff;
+	&.page-countdown {
+		background: #000;
+		color: #fff;
+	}
+	&.page-create {
+		main {
+			width: 90%;
+			margin: 30px auto;
+		}
+	}
 }
 form input {
 	color: #000;
@@ -55,5 +63,11 @@ form input {
 				color: #888;
 			}
 		}
+	}
+}
+
+.create-form {
+	.form-color {
+		width: 70px;
 	}
 }
