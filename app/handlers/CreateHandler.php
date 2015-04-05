@@ -5,6 +5,7 @@ use Nette\Database\Context;
 use Nette\Forms\Container;
 use \Nette\Forms\Form;
 use NetteModule\MicroPresenter;
+use Tracy\Debugger;
 
 class CreateHandler extends \Nette\Object
 {
@@ -51,16 +52,25 @@ class CreateHandler extends \Nette\Object
 
 	private function createCountdown(\stdClass $values)
 	{
-		$name = \Nette\Utils\Random::generate(5);
 		$dateTime = $values->dateTime;
-		$this->database->query('INSERT INTO countdown ?', [
-			'name' => $name,
-			'prologue' => $values->prologue ?: null,
-			'epilogue' => $values->epilogue,
-			'expiration' => \Nette\Utils\DateTime::from("{$dateTime->year}-{$dateTime->month}-{$dateTime->day} {$dateTime->hour}:{$dateTime->minute}:{$dateTime->second}"),
-			'background' => ltrim($values->backgroundColor, '#'),
-			'color' => ltrim($values->textColor, '#'),
-		]);
+
+		do {
+			try {
+				$name = \Nette\Utils\Random::generate(5);
+				$this->database->query('INSERT INTO countdown ?', [
+					'name' => $name,
+					'prologue' => $values->prologue ?: null,
+					'epilogue' => $values->epilogue,
+					'expiration' => \Nette\Utils\DateTime::from("{$dateTime->year}-{$dateTime->month}-{$dateTime->day} {$dateTime->hour}:{$dateTime->minute}:{$dateTime->second}"),
+					'background' => ltrim($values->backgroundColor, '#'),
+					'color' => ltrim($values->textColor, '#'),
+				]);
+				break;
+			} catch (\Nette\Database\UniqueConstraintViolationException $e) {
+				Debugger::log($e, Debugger::ERROR);
+			}
+		} while (1);
+
 		return $name;
 	}
 
