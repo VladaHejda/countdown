@@ -55,7 +55,10 @@ form input {
 .main-outer .main-inner #epilogue h1 {
   font-size: 8vmin;
 }
-.main-outer .main-inner #epilogue.notfound h1 {
+.main-outer .main-inner #epilogue.homepage-epilogue {
+  font-size: 3vmin;
+}
+.main-outer .main-inner #epilogue.homepage-epilogue p {
   font-style: italic;
   color: #888;
 }
